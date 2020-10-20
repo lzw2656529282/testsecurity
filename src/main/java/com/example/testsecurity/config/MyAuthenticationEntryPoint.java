@@ -21,7 +21,6 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Autowired
     private RedissonClient redissonClient;
 
-
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json;charset=UTF-8");
