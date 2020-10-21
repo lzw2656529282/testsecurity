@@ -1,6 +1,7 @@
 package com.example.testsecurity.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+    @Autowired
+    MyAuthenticationEntryPoint myAuthenticationEntryPoint;
+    @Autowired
+    MyAccessDeniedHandler myAccessDeniedHandler;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //拦截所有的请求
@@ -32,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 //执行各种处理器
                 //1.角色验证失败
-                .and().exceptionHandling().accessDeniedHandler(new MyAccessDeniedHandler())
-                .authenticationEntryPoint(new MyAuthenticationEntryPoint())
+                .and().exceptionHandling().accessDeniedHandler(myAccessDeniedHandler)
+                .authenticationEntryPoint(myAuthenticationEntryPoint)
                 ;
         //没有权限跳转到登录页面
         http.formLogin();

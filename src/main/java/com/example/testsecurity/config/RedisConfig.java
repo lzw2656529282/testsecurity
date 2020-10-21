@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
 
@@ -16,16 +17,17 @@ import javax.annotation.Resource;
  * @date: 2020/10/19
  */
 @Configuration
-@Resource(name = "classpath:application.xml")
-public class RedisConfig  {
-    @Autowired
-    private RedisProperties redisProperties;
-
+public class RedisConfig {
+    @Value("${spring.redis.host}")
+    private String host;
+    @Value("${spring.redis.port}")
+    private String port;
     @Bean
-    public RedissonClient redissonClient(){
+    public RedissonClient redissonClient() {
         Config config = new Config();
-        String redisUrl = String.format("redis://%s:%s",redisProperties.getHost()+"",redisProperties.getPort()+"");
+        String redisUrl = String.format("redis://%s:%s",host,port);
         config.useSingleServer().setAddress(redisUrl);
         return Redisson.create(config);
     }
+
 }

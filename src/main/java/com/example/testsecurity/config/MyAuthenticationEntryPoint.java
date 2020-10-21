@@ -2,9 +2,9 @@ package com.example.testsecurity.config;
 
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author: liuzhenwei
  * @date: 2020/10/16
  */
-@Configuration
+@Component
 public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Autowired
