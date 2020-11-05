@@ -2,7 +2,8 @@ spring:
   redis:
     sentinel:
       master: myredis
-      nodes: 192.168.196.130:26379
+#      nodes: 192.168.196.130:26379
+      nodes: 192.168.0.106:26379
     lettuce:
       pool:
         max-idle: 10

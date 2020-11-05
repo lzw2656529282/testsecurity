@@ -16,7 +16,8 @@ public class RedisController {
 
     @GetMapping("/add")
     public String add(String key,String value){
-        redisTemplate.opsForValue().set("k3","v3");
+        System.out.println(key+":"+value);
+        redisTemplate.opsForValue().set(key,value);
         return "ok";
     }
 }
