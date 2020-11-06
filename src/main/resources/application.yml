@@ -1,13 +1,14 @@
 spring:
   redis:
     sentinel:
-      master: myredis
-      nodes: 192.168.196.130:26379
+      master:  myredis
+      nodes: 192.168.196.130:26379,192.168.196.130:26380,192.168.196.130:26381
     lettuce:
       pool:
         max-idle: 10
         max-active: 20
         min-idle: 5
         max-wait: 10000ms
+    timeout: 300000
 server:
   port: 8999
